@@ -1,12 +1,14 @@
 import bycript from "bcryptjs";
 
 import User from "../models/user.model.js";
+import { errorHandler } from "../utils/error.js";
 
-export async function signup(req, res) {
+export async function signup(req, res, next) {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+        next(errorHandler(400, "All fields are required"));
+        // return res.status(400).json({ message: "All fields are required" });
     }
 
     const hashedPassword = bycript.hashSync(password, 10);
@@ -17,6 +19,7 @@ export async function signup(req, res) {
         await newUser.save();
         res.json({ message: "User created" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
+        // res.status(500).json({ message: error.message });
     }
 }
