@@ -14,6 +14,8 @@ import "react-circular-progressbar/dist/styles.css";
 import {
     deleUserStart,
     deleUserSuccess,
+    signInFailure,
+    signInSuccess,
     updateFailure,
     updateStart,
     updateSuccess,
@@ -131,6 +133,17 @@ export default function DashProfile() {
         }
     };
 
+    const handleSignOut = async () => {
+        try {
+            const res = await axios.post("/api/v1/user/signout");
+            console.log(res);
+            dispatch(signInSuccess());
+        } catch (error) {
+            console.log(error);
+            dispatch(signInFailure(error.response.data.message));
+        }
+    };
+
     return (
         <div className=" max-w-lg mx-auto p-3 w-full relative">
             <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
@@ -216,7 +229,9 @@ export default function DashProfile() {
                 >
                     Delete Account
                 </span>
-                <span className="cursor-pointer">Sign Out</span>
+                <span className="cursor-pointer" onClick={handleSignOut}>
+                    Sign Out
+                </span>
             </div>
             {updateUserSuccess && (
                 <Alert color={"success"} className="mt-5">
