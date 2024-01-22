@@ -1,6 +1,5 @@
-import { Alert, Button, Modal, TextInput } from "flowbite-react";
-import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getDownloadURL,
@@ -9,6 +8,10 @@ import {
     uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import { Link } from "react-router-dom";
+
+import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Alert, Button, Modal, TextInput } from "flowbite-react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import {
@@ -20,11 +23,10 @@ import {
     updateStart,
     updateSuccess,
 } from "../redux/user/userSlice";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function DashProfile() {
     const dispatch = useDispatch();
-    const { currentUser, error } = useSelector((state) => state.user);
+    const { currentUser, error, loading } = useSelector((state) => state.user);
     const [imageFile, setImageFile] = useState(null);
     const [imageFileUrl, setImageFileUrl] = useState(null);
     const filePickerRef = useRef(null);
@@ -218,9 +220,25 @@ export default function DashProfile() {
                     placeholder="password"
                     onChange={handleChange}
                 />
-                <Button type="submit" gradientDuoTone={"purpleToBlue"} outline>
-                    Update
+                <Button
+                    type="submit"
+                    gradientDuoTone={"purpleToBlue"}
+                    outline
+                    disabled={loading || imageFileUpdloading}
+                >
+                    {loading || imageFileUpdloading ? "Loading..." : "Update"}
                 </Button>
+                {currentUser.isAdmin && (
+                    <Link to={"/create-post"}>
+                        <Button
+                            type="button"
+                            gradientDuoTone={"purpleToPink"}
+                            className="w-full"
+                        >
+                            Create a new post
+                        </Button>
+                    </Link>
+                )}
             </form>
             <div className="flex text-red-500 justify-between">
                 <span
