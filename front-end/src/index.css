@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
     height: 100vh;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .ql-editor {
@@ -37,5 +39,5 @@ body {
 }
 
 .dark .post-content a {
-    color: red;
+    color: #58a6ff;
 }
