@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 import { Button, Spinner } from "flowbite-react";
+import CallToAction from "../components/CallToAction";
+import CommentSection from "../components/CommentSection";
 
 export default function PostPage() {
     const { postSlug } = useParams();
@@ -73,6 +75,10 @@ export default function PostPage() {
                     __html: post && DOMPurify.sanitize(post.content),
                 }}
             ></div>
+            <div className="mx-auto max-w-4xl w-full">
+                <CallToAction />
+            </div>
+            <CommentSection postId={post._id} />
         </main>
     );
 }
