@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -7,6 +7,8 @@ import { Alert, Button, Textarea } from "flowbite-react";
 import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
+    const nagigate = useNavigate();
+
     const { currentUser } = useSelector((state) => state.user);
     const [comment, setComment] = useState("");
     const [commentError, setCommentError] = useState(null);
@@ -44,6 +46,32 @@ export default function CommentSection({ postId }) {
         } catch (error) {
             setComment("");
             setCommentError(error.response.data.message);
+            console.log(error);
+        }
+    };
+
+    const handleLike = async (commentId) => {
+        try {
+            if (!currentUser) {
+                nagigate("/sign-in");
+                return;
+            }
+            const res = await axios.put(
+                `/api/v1/comment/likeComment/${commentId}`
+            );
+            console.log(res);
+            setComments(
+                comments.map((comment) =>
+                    comment._id === commentId
+                        ? {
+                              ...comment,
+                              likes: res.data.likes,
+                              numberOfLikes: res.data.numberOfLikes,
+                          }
+                        : comment
+                )
+            );
+        } catch (error) {
             console.log(error);
         }
     };
@@ -118,8 +146,12 @@ export default function CommentSection({ postId }) {
                         </div>
                     </div>
                     {comments &&
-                        comments.map((comment, index) => (
-                            <Comment key={comment._id} comment={comment} />
+                        comments.map((comment) => (
+                            <Comment
+                                key={comment._id}
+                                comment={comment}
+                                onLike={handleLike}
+                            />
                         ))}
                 </>
             )}
