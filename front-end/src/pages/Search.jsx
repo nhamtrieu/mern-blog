@@ -34,12 +34,10 @@ export default function Search() {
             try {
                 setLoading(true);
                 const searchQuery = urlParams.toString();
-                console.log(searchQuery);
                 const res = await axios.get(
                     `/api/v1/post/getposts?${searchQuery}`
                 );
                 setLoading(false);
-                console.log(res);
                 setPosts(res.data.posts);
                 if (res.data.posts.length <= 9) setShowMore(false);
                 else setShowMore(true);
@@ -82,7 +80,6 @@ export default function Search() {
         }
         if (e.target.id === "sort") {
             const order = e.target.value || "desc";
-            console.log(order);
             setSidebarData({
                 ...sidebarData,
                 sort: order,
@@ -103,7 +100,6 @@ export default function Search() {
         const urlParams = new URLSearchParams(localtion.search);
         urlParams.set("startIndex", startIndex);
         const searchQuery = urlParams.toString();
-        console.log(searchQuery);
         try {
             const res = await axios.get(`/api/v1/post/getposts?${searchQuery}`);
             setPosts([...posts, ...res.data.posts]);

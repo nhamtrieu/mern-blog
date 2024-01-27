@@ -16,13 +16,11 @@ export default function OAuth() {
         provider.setCustomParameters({ prompt: "select_account" });
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider);
-            console.log(resultsFromGoogle);
             const { data: res } = await axios.post("/api/v1/auth/google", {
                 name: resultsFromGoogle.user.displayName,
                 email: resultsFromGoogle.user.email,
                 googlePhotoUrl: resultsFromGoogle.user.photoURL,
             });
-            console.log(res);
 
             dispatch(signInSuccess(res));
             navigate("/");

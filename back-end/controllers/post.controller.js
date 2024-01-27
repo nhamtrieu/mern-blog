@@ -2,7 +2,6 @@ import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const create = async (req, res, next) => {
-    // console.log(req.user);
     if (!req.user.isAdmin) {
         return next(errorHandler(403, "Only admin can create a post"));
     }
@@ -77,7 +76,6 @@ export const getposts = async (req, res, next) => {
             posts,
         });
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };

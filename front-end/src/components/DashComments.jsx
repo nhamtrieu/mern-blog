@@ -17,7 +17,6 @@ export default function DashComments() {
                 const commentsData = await axios.get(
                     `/api/v1/comment/getcomments`
                 );
-                console.log(commentsData.data);
                 setComments(commentsData.data?.comments);
                 if (commentsData.data?.comments.length < 9) {
                     setShowMore(false);
@@ -36,7 +35,6 @@ export default function DashComments() {
             const res = await axios.get(
                 `/api/v1/comments/getcomments?startIndex=${startIndex}`
             );
-            console.log(res);
             setComments([...comments, ...res.data.comments]);
             if (res.data.comments.length < 9) {
                 setShowMore(false);
@@ -51,7 +49,6 @@ export default function DashComments() {
             const res = await axios.delete(
                 `/api/v1/comment/deleteComment/${commentIdToDelete}`
             );
-            // console.log(res);
             setComments((prev) =>
                 prev.filter((comment) => comment._id !== commentIdToDelete)
             );

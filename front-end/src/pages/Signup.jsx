@@ -23,9 +23,7 @@ export default function Signup() {
             setLoading(true);
             setErrorMessages(null);
             const res = await axios.post("/api/v1/auth/sign-up", formData);
-            console.log(res.data);
             if (res.data?.success === false) {
-                console.log("res.data?.message");
                 return setErrorMessages(res.data?.message);
             }
             setLoading(false);

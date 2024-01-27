@@ -25,7 +25,6 @@ export default function PostPage() {
                 );
                 setPost(res.data.posts[0]);
                 setLoading(false);
-                console.log(res);
             } catch (error) {
                 setLoading(false);
                 setError(true);

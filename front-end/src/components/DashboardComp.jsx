@@ -27,7 +27,6 @@ export default function DashboardComp() {
         const getUsers = async () => {
             try {
                 const res = await axios.get("/api/v1/user/getUsers?limit=5");
-                console.log(res);
                 setUsers(res.data.users);
                 setTotalUsers(res.data.totalUsers);
                 setLastMonthUsers(res.data.lastMonthUsers);
@@ -38,7 +37,6 @@ export default function DashboardComp() {
         const getPosts = async () => {
             try {
                 const res = await axios.get("/api/v1/post/getPosts?limit=5");
-                console.log(res);
                 setPosts(res.data.posts);
                 setTotalPosts(res.data.totalPosts);
                 setLastMonthPosts(res.data.lastMonthPosts);
@@ -51,7 +49,6 @@ export default function DashboardComp() {
                 const res = await axios.get(
                     "/api/v1/comment/getComments?limit=5"
                 );
-                console.log(res);
                 setComments(res.data.comments);
                 setTotalComments(res.data.totalComments);
                 setLastMonthComments(res.data.lastMonthComments);

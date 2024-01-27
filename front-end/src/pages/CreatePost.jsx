@@ -57,15 +57,12 @@ export default function CreatePost() {
         } catch (error) {
             setImageUploadError("Image upload failed");
             setImageUploadProgress(null);
-            console.log(error);
         }
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
             const res = await axios.post("/api/v1/post/create", formData);
-            console.log(res.data);
             setPublishError(null);
             navigate(`/post/${res.data.slug}`);
         } catch (error) {

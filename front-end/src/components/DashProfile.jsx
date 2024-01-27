@@ -111,7 +111,6 @@ export default function DashProfile() {
                 `/api/v1/user/update/${currentUser._id}`,
                 formData
             );
-            console.log(res);
             dispatch(updateSuccess(res.data));
             setUpdateUserSuccess("User updated successfully");
         } catch (error) {
@@ -128,7 +127,6 @@ export default function DashProfile() {
             const res = await axios.delete(
                 `/api/v1/user/delete/${currentUser._id}`
             );
-            console.log(res);
             dispatch(deleUserSuccess(res.data));
         } catch (error) {
             dispatch(updateFailure(error.response.data.message));
@@ -138,7 +136,6 @@ export default function DashProfile() {
     const handleSignOut = async () => {
         try {
             const res = await axios.post("/api/v1/user/signout");
-            console.log(res);
             dispatch(signInSuccess());
         } catch (error) {
             console.log(error);

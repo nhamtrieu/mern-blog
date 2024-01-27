@@ -16,7 +16,6 @@ export default function DashUser() {
         const getUser = async () => {
             try {
                 const usersData = await axios.get(`/api/v1/user/getusers`);
-                console.log(usersData.data);
                 setUsers(usersData.data?.users);
                 if (usersData.data?.users.length < 9) {
                     setShowMore(false);
@@ -35,7 +34,6 @@ export default function DashUser() {
             const res = await axios.get(
                 `/api/v1/user/getusers?startIndex=${startIndex}`
             );
-            console.log(res);
             setUsers([...users, ...res.data.users]);
             if (res.data.users.length < 9) {
                 setShowMore(false);
@@ -50,7 +48,6 @@ export default function DashUser() {
             const res = await axios.delete(
                 `/api/v1/user/delete/${userIdToDelete}`
             );
-            console.log(res);
             setUsers((prev) =>
                 prev.filter((user) => user._id !== userIdToDelete)
             );

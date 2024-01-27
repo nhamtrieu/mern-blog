@@ -13,9 +13,7 @@ dotenv.config();
 
 mongoose
     .connect(process.env.MONGO)
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
+    .then(() => {})
     .catch((err) => {
         console.log(err);
     });
@@ -27,9 +25,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(port, () => {
-    console.log("Server is running on port: " + port);
-});
+app.listen(port, () => {});
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/auth", authRoute);

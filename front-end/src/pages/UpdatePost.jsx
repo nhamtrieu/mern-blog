@@ -33,7 +33,6 @@ export default function UpdatePost() {
                 const res = await axios.get(
                     `/api/v1/post/getposts?postId=${postId}`
                 );
-                console.log(res);
                 setFormData(res.data.posts[0]);
             };
             getPost();
@@ -76,22 +75,18 @@ export default function UpdatePost() {
         } catch (error) {
             setImageUploadError("Image upload failed");
             setImageUploadProgress(null);
-            console.log(error);
         }
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
             const res = await axios.put(
                 `/api/v1/post/update/${formData._id}/${currentUser._id}`,
                 formData
             );
-            console.log(res.data);
             setPublishError(null);
             navigate(`/post/${res.data.slug}`);
         } catch (error) {
-            console.log(error.response.data.message);
             setPublishError(error.response.data.message);
         }
     };

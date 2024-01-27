@@ -30,9 +30,7 @@ export default function Signin() {
         try {
             dispatch(signInStart());
             const res = await axios.post("/api/v1/auth/sign-in", formData);
-            console.log(res.data);
             if (res.data?.success === false) {
-                console.log("res.data?.message");
                 dispatch(signInFailure(res.data?.message));
             }
             dispatch(signInSuccess(res.data));

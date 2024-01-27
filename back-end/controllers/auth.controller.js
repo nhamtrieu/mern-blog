@@ -24,14 +24,12 @@ export async function signup(req, res, next) {
 }
 
 export async function signin(req, res, next) {
-    console.log(req.body);
     const { email, password } = req.body;
     if (!email || !password) {
         return next(errorHandler(400, "All fields are required"));
     }
     try {
         const validUser = await User.findOne({ email });
-        console.log(validUser);
         if (!validUser) {
             return next(errorHandler(404, "User not found"));
         }
@@ -91,14 +89,12 @@ export const google = async (req, res, next) => {
                 process.env.JWT_SECRET
             );
             const { password, ...user } = newUser._doc;
-            console.log(user);
             return res
                 .status(200)
                 .cookie("access_token", token, { httpOnly: true })
                 .json(user);
         }
     } catch (error) {
-        // console.log(error);
         next(error);
     }
 };

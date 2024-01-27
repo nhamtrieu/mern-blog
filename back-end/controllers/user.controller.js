@@ -80,7 +80,6 @@ export const deleteUser = async (req, res, next) => {
 
 export const signout = (req, res, next) => {
     try {
-        // console.log("signout");
         return res
             .clearCookie("access_token")
             .status(200)

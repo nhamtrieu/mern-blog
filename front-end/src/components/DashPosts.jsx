@@ -17,7 +17,6 @@ export default function DashPosts() {
                 const postsData = await axios.get(
                     `/api/v1/post/getposts?userId=${currentUser._id}`
                 );
-                console.log(postsData.data);
                 setUserPosts(postsData.data?.posts);
                 if (postsData.data?.posts.length < 9) {
                     setShowMore(false);
@@ -36,7 +35,6 @@ export default function DashPosts() {
             const res = await axios.get(
                 `/api/v1/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
             );
-            console.log(res);
             setUserPosts([...userPosts, ...res.data.posts]);
             if (res.data.posts.length < 9) {
                 setShowMore(false);
@@ -51,7 +49,6 @@ export default function DashPosts() {
             const res = await axios.delete(
                 `/api/v1/post/delete/${postIdToDelete}/${currentUser._id}`
             );
-            console.log(res);
             setUserPosts((prev) =>
                 prev.filter((post) => post._id !== postIdToDelete)
             );

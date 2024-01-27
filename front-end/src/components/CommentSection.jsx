@@ -63,7 +63,6 @@ export default function CommentSection({ postId }) {
             const res = await axios.put(
                 `/api/v1/comment/likeComment/${commentId}`
             );
-            console.log(res);
             setComments(
                 comments.map((comment) =>
                     comment._id === commentId
@@ -97,7 +96,6 @@ export default function CommentSection({ postId }) {
             const res = await axios.delete(
                 `/api/v1/comment/deleteComment/${commentId}`
             );
-            console.log(res);
             setComments(comments.filter((c) => c._id !== commentId));
             setShowModal(false);
         } catch (error) {
