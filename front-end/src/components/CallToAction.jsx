@@ -1,4 +1,5 @@
 import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function CallToAction() {
     return (
@@ -8,11 +9,18 @@ export default function CallToAction() {
                 <p className="text-gray-500 ">
                     Checkout these resources with React
                 </p>
-                <Button gradientDuoTone={"purpleToPink"} className="rounded-xl">
-                    <a href="https://google.com" target="_blank">
-                        Learn more
-                    </a>
-                </Button>
+                <Link
+                    to={"https://google.com"}
+                    target="_blank"
+                    className="w-full"
+                >
+                    <Button
+                        gradientDuoTone={"purpleToPink"}
+                        className="rounded-xl w-full"
+                    >
+                        Learn More
+                    </Button>
+                </Link>
             </div>
             <div className="w-1/2">
                 <img

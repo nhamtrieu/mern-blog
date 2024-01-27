@@ -122,3 +122,15 @@ export const updatepost = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getCategory = async (req, res, next) => {
+    try {
+        const posts = await Post.find();
+        const category = [];
+        posts.map((post) => category.push(post.category));
+        const uniqueCategory = [...new Set(category)];
+        res.status(200).json(uniqueCategory);
+    } catch (error) {
+        next(error);
+    }
+};
